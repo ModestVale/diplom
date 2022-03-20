@@ -1,0 +1,1 @@
+java -jar aqa-shop.jar

@@ -11,3 +11,37 @@ services:
       - MYSQL_PASSWORD=pass
     volumes:
       - ./sql:/docker-entrypoint-initdb.d
+  postgres:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - ./dataps:/var/lib/postgres
+  emulator:
+      build: ./artifacts/gate-simulator
+      image: node-app:1.0
+      container_name: js-container
+      ports:
+        - '9999:9999'
+  application-postgresql:
+      depends_on:
+        - postgres
+        - emulator
+      build: ./artifacts/application-postgresql
+      image: application-postgresql:1.0
+      container_name: application-postgresql
+      ports:
+        - '8081:8080'
+  application-mysql:
+    depends_on:
+      - emulator
+      - mysqldb
+    build: ./artifacts/application-mysql
+    image: application-mysql:1.0
+    container_name: application-mysql
+    ports:
+      - '8080:8080'
