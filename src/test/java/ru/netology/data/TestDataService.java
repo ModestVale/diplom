@@ -33,6 +33,7 @@ public class TestDataService {
 
         return output;
     }
+
     public static TestData GetTestDataWithRandomCard() {
 
         val output = new TestData();
@@ -49,30 +50,30 @@ public class TestDataService {
 
         val output = new TestData();
 
-        if(emptyDataField != TestDataFieldEnum.CardCvv) {
+        if (emptyDataField != TestDataFieldEnum.CardCvv) {
             output.setCardCvv(faker.number().digits(3));
         }
 
-        if(emptyDataField != TestDataFieldEnum.CardHolder) {
+        if (emptyDataField != TestDataFieldEnum.CardHolder) {
             output.setCardHolder(fakerEn.name().fullName());
         }
 
-        if(emptyDataField != TestDataFieldEnum.CardYear) {
+        if (emptyDataField != TestDataFieldEnum.CardYear) {
             output.setCardYear(LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy")));
         }
 
-        if(emptyDataField != TestDataFieldEnum.CardMont) {
+        if (emptyDataField != TestDataFieldEnum.CardMont) {
             output.setCardMonth("01");
         }
 
-        if(emptyDataField != TestDataFieldEnum.CardNumber) {
+        if (emptyDataField != TestDataFieldEnum.CardNumber) {
             output.setCardNumber(fakerEn.business().creditCardNumber());
         }
 
         return output;
     }
 
-    public enum TestDataFieldEnum{
+    public enum TestDataFieldEnum {
         CardNumber,
         CardMont,
         CardYear,

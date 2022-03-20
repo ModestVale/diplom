@@ -9,11 +9,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DbUtils {
-    static String dataSourceUrl = "jdbc:mysql://localhost:3306/app";
     static String dataSourceUsername = "app";
     static String dataSourcePassword = "pass";
 
-    public static PaymentStatusDb getPaymentStatus(String dataSourceUrl1) {
+    public static PaymentStatusDb getPaymentStatus(String dataSourceUrl) {
         val runner = new QueryRunner();
         val dataSQL = "SELECT\n" +
                 "\tcre.status as creditStatus,\n" +
@@ -38,5 +37,17 @@ public class DbUtils {
             e.printStackTrace();
         }
         return statusInDB;
+    }
+
+    public static void clearTables(String dataSourceUrl) {
+        try {
+            val con = DriverManager.getConnection(dataSourceUrl, dataSourceUsername, dataSourcePassword);
+            val stmt = con.createStatement();
+            stmt.executeUpdate("DELETE FROM order_entity");
+            stmt.executeUpdate("DELETE FROM credit_request_entity");
+            stmt.executeUpdate("DELETE FROM payment_entity");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

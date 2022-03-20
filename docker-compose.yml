@@ -22,20 +22,20 @@ services:
     volumes:
       - ./dataps:/var/lib/postgres
   emulator:
-      build: ./artifacts/gate-simulator
-      image: node-app:1.0
-      container_name: js-container
-      ports:
-        - '9999:9999'
+    build: ./artifacts/gate-simulator
+    image: node-app:1.0
+    container_name: js-container
+    ports:
+      - '9999:9999'
   application-postgresql:
-      depends_on:
-        - postgres
-        - emulator
-      build: ./artifacts/application-postgresql
-      image: application-postgresql:1.0
-      container_name: application-postgresql
-      ports:
-        - '8081:8080'
+    depends_on:
+      - postgres
+      - emulator
+    build: ./artifacts/application-postgresql
+    image: application-postgresql:1.0
+    container_name: application-postgresql
+    ports:
+      - '8081:8080'
   application-mysql:
     depends_on:
       - emulator
