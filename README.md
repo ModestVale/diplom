@@ -5,4 +5,4 @@
 2. Перейти в папку <code>diplom</code> 
 3. Запустить контейнеры docker:  <code>docker-compose up</code>
 4. Запустить тесты:  <code>gradlew test</code>
-5. Отчеты Gradle о тестировании находтся по пути: <code>build\reports\tests\test<code/>
+5. Отчеты Gradle о тестировании находтся по пути: <code>build\reports\tests\test</code>
